@@ -4,9 +4,11 @@ import TodoList from "../../components/TodoList";
 import './index.css';
 
 const App = ({ store }) => (
-    <div className="container">
-        <AddTodo addTodo={store.addTodo} />
-        <TodoList todos={store.todos} />
+    <div className="wrapper">
+        <div className="content">
+            <AddTodo addTodo={store.addTodo} />
+            <TodoList todos={store.todos} />
+        </div>
     </div>
 );
 
