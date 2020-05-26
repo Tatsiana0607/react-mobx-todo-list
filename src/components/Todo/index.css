@@ -23,6 +23,7 @@
 .checkbox {
     width: 16px;
     height: 16px;
+    min-width: 16px;
     border-radius: 3px;
     border: 2px solid black;
     display: flex;
@@ -67,4 +68,8 @@
 
 .pencil-icon, .trash-icon, .done-icon {
     width: 23px;
+}
+
+.list-input {
+    width: 100%;
 }

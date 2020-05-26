@@ -36,10 +36,10 @@ class Todo extends PureComponent {
     };
 
     handleSave = () => {
-        const { todo, updateTodo } = this.props;
+        const { todo } = this.props;
         const { invalid, title } = this.state;
         if (invalid) return;
-        updateTodo(todo.id, title);
+        todo.title = title;
         this.setState({ isEdit: false });
     };
 
@@ -64,7 +64,7 @@ class Todo extends PureComponent {
                             placeholder="Enter task"
                             value={title}
                             onChange={this.handleChangeTitle}
-                            className={classNames('input', { 'invalid': invalid })}
+                            className={classNames('input', 'list-input', { 'invalid': invalid })}
                         />
                     ) : (
                         <div>
