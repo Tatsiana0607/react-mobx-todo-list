@@ -1,25 +1,36 @@
 .todo {
-    padding: 10px;
     background-color: white;
     margin: 8px;
     border-radius: 5px;
     box-shadow: 0 1px 2px 1px rgba(0,0,0,0.2);
     font-size: 22px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     user-select: none;
+}
+
+.name, .icons {
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+}
+
+.name {
+    padding: 10px;
+    min-height: 40px;
 }
 
 .checkbox {
     width: 16px;
     height: 16px;
+    min-width: 16px;
     border-radius: 3px;
     border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .tick {
@@ -34,4 +45,31 @@
 
 .finished .checkbox {
     border-color: darkgray;
+}
+
+.pencil, .trash, .done {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.pencil, .done {
+    background-color: darkseagreen;
+}
+
+.trash {
+    background-color: indianred;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pencil-icon, .trash-icon, .done-icon {
+    width: 23px;
+}
+
+.list-input {
+    width: 100%;
 }

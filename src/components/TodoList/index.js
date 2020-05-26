@@ -3,10 +3,14 @@ import { observer } from "mobx-react";
 import Todo from "../Todo";
 import './index.css';
 
-const TodoList = observer(({ todos }) => (
+const TodoList = observer(({ store: { todos, deleteTodo } }) => (
     <div className="list">
         {todos.map(todo => (
-            <Todo todo={todo} />
+            <Todo
+                key={todo.id}
+                todo={todo}
+                deleteTodo={deleteTodo}
+            />
         ))}
     </div>
 ));
