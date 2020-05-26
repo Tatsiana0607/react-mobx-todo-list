@@ -10,13 +10,13 @@ const Todo = observer(({ todo }) => {
     };
     return (
         <div className={classNames('todo', { 'finished': todo.finished })}>
-            <div>
-                {todo.title}
-            </div>
             <div className="checkbox" onClick={handleCheck}>
                 {todo.finished && (
                     <img src={TickGrey} className="tick" alt="tick" />
                 )}
+            </div>
+            <div>
+                {todo.title}
             </div>
         </div>
     );

@@ -6,6 +6,14 @@ class TodoStore {
         { id: 2, title: 'test 2', finished: false },
         { id: 3, title: 'test 3', finished: false },
     ];
+
+    addTodo = (title) => {
+        this.todos.push({
+            id: Math.random(),
+            title,
+            finished: false,
+        });
+    }
 }
 
 decorate(TodoStore, {
