@@ -13,6 +13,14 @@ class TodoStore {
             title,
             finished: false,
         });
+    };
+
+    deleteTodo = (id) => {
+        this.todos = this.todos.filter(todo => todo.id !== id);
+    };
+
+    updateTodo = (id, title) => {
+        this.todos = this.todos.map(todo => todo.id === id ? { ...todo, title } : todo);
     }
 }
 

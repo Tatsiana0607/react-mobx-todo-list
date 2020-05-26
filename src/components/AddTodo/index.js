@@ -22,7 +22,7 @@ class AddTodo extends PureComponent {
             this.setState({ invalid: true });
             return;
         }
-        const { addTodo } = this.props;
+        const { store: { addTodo } } = this.props;
         addTodo(title);
         this.setState({ title: '' });
     };
