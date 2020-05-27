@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { inject } from "mobx-react";
 import classNames from 'classnames';
 import './index.css';
 
@@ -51,4 +52,4 @@ class AddTodo extends PureComponent {
     }
 }
 
-export default AddTodo;
+export default inject('store')(AddTodo);

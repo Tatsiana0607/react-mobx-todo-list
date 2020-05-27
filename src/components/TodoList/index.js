@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import Tabs from "../Tabs";
+import Search from "../Search";
 import Todo from "../Todo";
 import './index.css';
 
@@ -23,6 +24,7 @@ class TodoList extends PureComponent {
                     activeCount={activeTodos.length}
                     finishedCount={finishedTodos.length}
                 />
+                <Search />
                 {todos.length ? todos.map(todo => (
                     <Todo
                         key={todo.id}
@@ -31,7 +33,7 @@ class TodoList extends PureComponent {
                     />
                 )) : (
                     <div className="no-tasks">
-                        {`No ${activeTab} tasks yet.`}
+                        {`No ${activeTab} tasks.`}
                     </div>
                 )}
             </div>
@@ -39,4 +41,4 @@ class TodoList extends PureComponent {
     }
 }
 
-export default observer(TodoList);
+export default inject('store')(observer(TodoList));

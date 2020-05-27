@@ -7,12 +7,14 @@ class TodoStore {
         { id: 3, title: 'test 3', finished: false },
     ];
 
+    searchValue = '';
+
     get finishedTodos() {
-        return this.todos.filter(todo => todo.finished);
+        return this.todos.filter(todo => todo.finished && todo.title.includes(this.searchValue));
     }
 
     get activeTodos() {
-        return this.todos.filter(todo => !todo.finished);
+        return this.todos.filter(todo => !todo.finished && todo.title.includes(this.searchValue));
     }
 
     addTodo = (title) => {
@@ -34,6 +36,7 @@ class TodoStore {
 
 decorate(TodoStore, {
     todos: observable,
+    searchValue: observable,
     finishedTodos: computed,
     activeTodos: computed,
 });

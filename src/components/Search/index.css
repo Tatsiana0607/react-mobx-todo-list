@@ -1,0 +1,8 @@
+.search {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+}
+
+.full {
+    width: calc(100% - 65px);
+}
