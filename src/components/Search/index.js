@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { inject } from "mobx-react";
 import classNames from "classnames";
+import SearchIcon from '../../assets/images/search.png';
 import './index.css';
 
 class Search extends PureComponent {
@@ -18,12 +19,15 @@ class Search extends PureComponent {
         const { searchValue } = this.state;
         return (
             <div className="search">
-                <input
-                    placeholder="Search task"
-                    value={searchValue}
-                    onChange={this.handleSearch}
-                    className={classNames('input', 'full')}
-                />
+                <div className="search-input">
+                    <input
+                        placeholder="Search task"
+                        value={searchValue}
+                        onChange={this.handleSearch}
+                        className={classNames('input', 'full')}
+                    />
+                    <img src={SearchIcon} className="search-icon" alt="search" />
+                </div>
             </div>
         );
     }
