@@ -1,4 +1,4 @@
-import { decorate, observable } from "mobx";
+import { decorate, observable, computed } from "mobx";
 
 class TodoStore {
     todos = [
@@ -6,6 +6,14 @@ class TodoStore {
         { id: 2, title: 'test 2', finished: false },
         { id: 3, title: 'test 3', finished: false },
     ];
+
+    get finishedTodos() {
+        return this.todos.filter(todo => todo.finished);
+    }
+
+    get activeTodos() {
+        return this.todos.filter(todo => !todo.finished);
+    }
 
     addTodo = (title) => {
         this.todos.push({
@@ -26,6 +34,8 @@ class TodoStore {
 
 decorate(TodoStore, {
     todos: observable,
+    finishedTodos: computed,
+    activeTodos: computed,
 });
 
 export default TodoStore;

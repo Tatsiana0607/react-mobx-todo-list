@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { observer } from "mobx-react";
+import Tabs from "../Tabs";
 import Todo from "../Todo";
 import './index.css';
 
-const TodoList = observer(({ store: { todos, deleteTodo } }) => (
-    <div className="list">
-        {todos.map(todo => (
-            <Todo
-                key={todo.id}
-                todo={todo}
-                deleteTodo={deleteTodo}
-            />
-        ))}
-    </div>
-));
+class TodoList extends PureComponent {
+    state = {
+      activeTab: 'active'
+    };
 
-export default TodoList;
+    changeTab = activeTab => this.setState({ activeTab });
+
+    render() {
+        const { activeTab } = this.state;
+        const { store: { activeTodos, finishedTodos, deleteTodo } } = this.props;
+        const todos = activeTab === 'active' ? activeTodos : finishedTodos;
+        return (
+            <div className="list">
+                <Tabs
+                    activeTab={activeTab}
+                    changeTab={this.changeTab}
+                    activeCount={activeTodos.length}
+                    finishedCount={finishedTodos.length}
+                />
+                {todos.length ? todos.map(todo => (
+                    <Todo
+                        key={todo.id}
+                        todo={todo}
+                        deleteTodo={deleteTodo}
+                    />
+                )) : (
+                    <div className="no-tasks">
+                        {`No ${activeTab} tasks yet.`}
+                    </div>
+                )}
+            </div>
+        );
+    }
+}
+
+export default observer(TodoList);

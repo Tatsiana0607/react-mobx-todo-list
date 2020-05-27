@@ -48,6 +48,36 @@ class Todo extends PureComponent {
         deleteTodo(todo.id);
     };
 
+    renderIcons = () => {
+        const { isEdit } = this.state;
+        const { todo } = this.props;
+        if (todo.finished) {
+            return (
+                <div className="icons">
+                    <div className="trash" onClick={this.handleDelete}>
+                        <img src={Trash} className="trash-icon" alt="trash" />
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div className="icons">
+                {isEdit ? (
+                    <div className="done" onClick={this.handleSave}>
+                        <img src={Done} className="done-icon" alt="done" />
+                    </div>
+                ) : (
+                    <div className="pencil" onClick={this.handleEdit}>
+                        <img src={Pencil} className="pencil-icon" alt="pencil" />
+                    </div>
+                )}
+                <div className="trash" onClick={this.handleDelete}>
+                    <img src={Trash} className="trash-icon" alt="trash" />
+                </div>
+            </div>
+        );
+    };
+
     render() {
         const { todo } = this.props;
         const { isEdit, title, invalid } = this.state;
@@ -72,20 +102,7 @@ class Todo extends PureComponent {
                         </div>
                     )}
                 </div>
-                <div className="icons">
-                    {isEdit ? (
-                        <div className="done" onClick={this.handleSave}>
-                            <img src={Done} className="done-icon" alt="done" />
-                        </div>
-                    ) : (
-                        <div className="pencil" onClick={this.handleEdit}>
-                            <img src={Pencil} className="pencil-icon" alt="pencil" />
-                        </div>
-                    )}
-                    <div className="trash" onClick={this.handleDelete}>
-                        <img src={Trash} className="trash-icon" alt="trash" />
-                    </div>
-                </div>
+                {this.renderIcons()}
             </div>
         );
     }

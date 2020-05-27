@@ -1,0 +1,30 @@
+.tabs {
+    display: flex;
+    background-color: lightsteelblue;
+}
+
+.tab {
+    flex-basis: 50%;
+    text-align: center;
+    padding: 10px;
+    font-size: 21px;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+}
+
+.tab.active {
+    background-color: steelblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.tab span {
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    color: steelblue;
+}
