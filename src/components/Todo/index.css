@@ -1,14 +1,5 @@
 .todo-wrapper {
     overflow: hidden;
-    transition: opacity .5s, max-height .5s;
-    height: auto;
-    max-height: 600px;
-    opacity: 1;
-}
-
-.todo-wrapper.hide-me {
-    opacity: 0;
-    max-height: 0;
 }
 
 .todo {

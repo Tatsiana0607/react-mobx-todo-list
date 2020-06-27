@@ -21,7 +21,7 @@ class Search extends PureComponent {
             <div className="search">
                 <div className="search-input">
                     <input
-                        placeholder="Search task"
+                        placeholder="Search TODO"
                         value={searchValue}
                         onChange={this.handleSearch}
                         className={classNames('input', 'full')}
