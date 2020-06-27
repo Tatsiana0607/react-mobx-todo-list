@@ -1,8 +1,13 @@
-.list {
+.list-container {
     background-color: steelblue;
     margin: 20px;
     border-radius: 10px;
     overflow: auto;
+}
+
+.list {
+    margin: 10px 20px;
+    min-height: 80px;
 }
 
 .no-tasks {

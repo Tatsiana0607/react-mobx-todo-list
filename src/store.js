@@ -18,7 +18,7 @@ class TodoStore {
     }
 
     addTodo = (title) => {
-        this.todos.push({
+        this.todos.unshift({
             id: Math.random(),
             title,
             finished: false,

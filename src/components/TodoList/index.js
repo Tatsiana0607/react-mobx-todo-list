@@ -17,7 +17,7 @@ class TodoList extends PureComponent {
         const { store: { activeTodos, finishedTodos, deleteTodo } } = this.props;
         const todos = activeTab === 'active' ? activeTodos : finishedTodos;
         return (
-            <div className="list">
+            <div className="list-container">
                 <Tabs
                     activeTab={activeTab}
                     changeTab={this.changeTab}
@@ -25,17 +25,19 @@ class TodoList extends PureComponent {
                     finishedCount={finishedTodos.length}
                 />
                 <Search />
-                {todos.length ? todos.map(todo => (
-                    <Todo
-                        key={todo.id}
-                        todo={todo}
-                        deleteTodo={deleteTodo}
-                    />
-                )) : (
-                    <div className="no-tasks">
-                        {`No ${activeTab} tasks.`}
-                    </div>
-                )}
+                <div className="list">
+                    {todos.length ? todos.map(todo => (
+                        <Todo
+                            key={todo.id}
+                            todo={todo}
+                            deleteTodo={deleteTodo}
+                        />
+                    )) : (
+                        <div className="no-tasks">
+                            {`No ${activeTab} tasks.`}
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

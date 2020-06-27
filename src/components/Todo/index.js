@@ -8,15 +8,22 @@ import Trash from '../../assets/images/trash.png';
 import './index.css';
 
 class Todo extends PureComponent {
-    state = {
-        title: '',
-        isEdit: false,
-        invalid: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            isEdit: false,
+            invalid: false,
+            finished: props.todo.finished
+        };
+    }
 
     handleCheck = () => {
-        const { todo } = this.props;
-        todo.finished = !todo.finished;
+        this.setState(state => ({ finished: !state.finished }));
+        this.showRemovalAnimation(() => {
+            const { todo } = this.props;
+            todo.finished = !todo.finished;
+        });
     };
 
     handleEdit = () => {
@@ -43,9 +50,18 @@ class Todo extends PureComponent {
         this.setState({ isEdit: false });
     };
 
-    handleDelete = () => {
+    handleDelete = () => this.showRemovalAnimation(() => {
         const { todo, deleteTodo } = this.props;
         deleteTodo(todo.id);
+    });
+
+    showRemovalAnimation = (actionHandler) => {
+        const { todo } = this.props;
+        const todoElem = document.getElementById(`todo-${todo.id}`);
+        todoElem.classList.add("hide-me");
+        setTimeout(() => {
+            actionHandler();
+        }, 500);
     };
 
     renderIcons = () => {
@@ -80,29 +96,31 @@ class Todo extends PureComponent {
 
     render() {
         const { todo } = this.props;
-        const { isEdit, title, invalid } = this.state;
+        const { isEdit, title, invalid, finished } = this.state;
         return (
-            <div className={classNames('todo', { 'finished': todo.finished })}>
-                <div className="name">
-                    <div className="checkbox" onClick={this.handleCheck}>
-                        {todo.finished && (
-                            <img src={TickGrey} className="tick" alt="tick" />
+            <div id={`todo-${todo.id}`} className="todo-wrapper">
+                <div className={classNames('todo', { 'finished': finished })}>
+                    <div className="name">
+                        <div className="checkbox" onClick={this.handleCheck}>
+                            {finished && (
+                                <img src={TickGrey} className="tick" alt="tick" />
+                            )}
+                        </div>
+                        {isEdit ? (
+                            <input
+                                placeholder="Enter task"
+                                value={title}
+                                onChange={this.handleChangeTitle}
+                                className={classNames('input', 'list-input', { 'invalid': invalid })}
+                            />
+                        ) : (
+                            <div>
+                                {todo.title}
+                            </div>
                         )}
                     </div>
-                    {isEdit ? (
-                        <input
-                            placeholder="Enter task"
-                            value={title}
-                            onChange={this.handleChangeTitle}
-                            className={classNames('input', 'list-input', { 'invalid': invalid })}
-                        />
-                    ) : (
-                        <div>
-                            {todo.title}
-                        </div>
-                    )}
+                    {this.renderIcons()}
                 </div>
-                {this.renderIcons()}
             </div>
         );
     }
