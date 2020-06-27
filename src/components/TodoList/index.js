@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+import * as CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { observer, inject } from "mobx-react";
+import classNames from "classnames";
 import Tabs from "../Tabs";
 import Search from "../Search";
 import Todo from "../Todo";
@@ -17,7 +19,7 @@ class TodoList extends PureComponent {
         const { store: { activeTodos, finishedTodos, deleteTodo } } = this.props;
         const todos = activeTab === 'active' ? activeTodos : finishedTodos;
         return (
-            <div className="list">
+            <div className="list-container">
                 <Tabs
                     activeTab={activeTab}
                     changeTab={this.changeTab}
@@ -25,17 +27,24 @@ class TodoList extends PureComponent {
                     finishedCount={finishedTodos.length}
                 />
                 <Search />
-                {todos.length ? todos.map(todo => (
-                    <Todo
-                        key={todo.id}
-                        todo={todo}
-                        deleteTodo={deleteTodo}
-                    />
-                )) : (
-                    <div className="no-tasks">
+                <CSSTransitionGroup
+                    component="div"
+                    className="list"
+                    transitionName="todo"
+                    transitionEnterTimeout={700}
+                    transitionLeaveTimeout={500}
+                >
+                    {todos.map(todo => (
+                        <Todo
+                            key={todo.id}
+                            todo={todo}
+                            deleteTodo={deleteTodo}
+                        />
+                    ))}
+                    <div className={classNames('no-tasks', { 'show': !todos.length })}>
                         {`No ${activeTab} tasks.`}
                     </div>
-                )}
+                </CSSTransitionGroup>
             </div>
         );
     }

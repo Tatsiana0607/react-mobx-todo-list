@@ -1,15 +1,54 @@
-.list {
+.list-container {
     background-color: steelblue;
     margin: 20px;
     border-radius: 10px;
     overflow: auto;
 }
 
+.list {
+    position: relative;
+    margin: 0 20px 10px;
+    min-height: 80px;
+    max-height: calc(100vh - 335px);
+    overflow: auto;
+}
+
+.todo-enter {
+    opacity: 0;
+    max-height: 0;
+}
+
+.todo-enter.todo-enter-active {
+    transition: opacity .7s, max-height .7s;
+    max-height: 500px;
+    opacity: 1;
+}
+
+.todo-leave {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.todo-leave.todo-leave-active {
+    opacity: 0;
+    max-height: 0;
+    transition: opacity .5s, max-height .5s;
+}
+
 .no-tasks {
+    pointer-events: none;
+    position: absolute;
+    top: 20px;
+    width: 100%;
     font-size: 21px;
     color: white;
     text-align: center;
-    padding: 20px;
+    opacity: 0;
+}
+
+.no-tasks.show {
+    opacity: 1;
+    transition: opacity 1s;
 }
 
 ::-webkit-scrollbar {

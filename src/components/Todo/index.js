@@ -82,27 +82,29 @@ class Todo extends PureComponent {
         const { todo } = this.props;
         const { isEdit, title, invalid } = this.state;
         return (
-            <div className={classNames('todo', { 'finished': todo.finished })}>
-                <div className="name">
-                    <div className="checkbox" onClick={this.handleCheck}>
-                        {todo.finished && (
-                            <img src={TickGrey} className="tick" alt="tick" />
+            <div className="todo-wrapper">
+                <div className={classNames('todo', { 'finished': todo.finished })}>
+                    <div className="name">
+                        <div className="checkbox" onClick={this.handleCheck}>
+                            {todo.finished && (
+                                <img src={TickGrey} className="tick" alt="tick" />
+                            )}
+                        </div>
+                        {isEdit ? (
+                            <input
+                                placeholder="Enter task"
+                                value={title}
+                                onChange={this.handleChangeTitle}
+                                className={classNames('input', 'list-input', { 'invalid': invalid })}
+                            />
+                        ) : (
+                            <div className="todo-title">
+                                {todo.title}
+                            </div>
                         )}
                     </div>
-                    {isEdit ? (
-                        <input
-                            placeholder="Enter task"
-                            value={title}
-                            onChange={this.handleChangeTitle}
-                            className={classNames('input', 'list-input', { 'invalid': invalid })}
-                        />
-                    ) : (
-                        <div>
-                            {todo.title}
-                        </div>
-                    )}
+                    {this.renderIcons()}
                 </div>
-                {this.renderIcons()}
             </div>
         );
     }
