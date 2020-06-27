@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import * as CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { observer, inject } from "mobx-react";
+import classNames from "classnames";
 import Tabs from "../Tabs";
 import Search from "../Search";
 import Todo from "../Todo";
@@ -26,27 +27,24 @@ class TodoList extends PureComponent {
                     finishedCount={finishedTodos.length}
                 />
                 <Search />
-                <div className="list">
-                    {todos.length ? (
-                        <CSSTransitionGroup
-                            transitionName="todo"
-                            transitionEnterTimeout={700}
-                            transitionLeaveTimeout={500}
-                        >
-                            {todos.map(todo => (
-                                <Todo
-                                    key={todo.id}
-                                    todo={todo}
-                                    deleteTodo={deleteTodo}
-                                />
-                            ))}
-                        </CSSTransitionGroup>
-                    ) : (
-                        <div className="no-tasks">
-                            {`No ${activeTab} tasks.`}
-                        </div>
-                    )}
-                </div>
+                <CSSTransitionGroup
+                    component="div"
+                    className="list"
+                    transitionName="todo"
+                    transitionEnterTimeout={700}
+                    transitionLeaveTimeout={500}
+                >
+                    {todos.map(todo => (
+                        <Todo
+                            key={todo.id}
+                            todo={todo}
+                            deleteTodo={deleteTodo}
+                        />
+                    ))}
+                    <div className={classNames('no-tasks', { 'show': !todos.length })}>
+                        {`No ${activeTab} tasks.`}
+                    </div>
+                </CSSTransitionGroup>
             </div>
         );
     }

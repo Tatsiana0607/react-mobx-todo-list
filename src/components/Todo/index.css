@@ -51,6 +51,10 @@
     border-color: darkgray;
 }
 
+.todo-title {
+    max-width: 265px;
+}
+
 .pencil, .trash, .done {
     display: flex;
     justify-content: center;

@@ -6,6 +6,7 @@
 }
 
 .list {
+    position: relative;
     margin: 0 20px 10px;
     min-height: 80px;
     max-height: calc(100vh - 335px);
@@ -35,10 +36,19 @@
 }
 
 .no-tasks {
+    pointer-events: none;
+    position: absolute;
+    top: 20px;
+    width: 100%;
     font-size: 21px;
     color: white;
     text-align: center;
-    padding: 20px;
+    opacity: 0;
+}
+
+.no-tasks.show {
+    opacity: 1;
+    transition: opacity 1s;
 }
 
 ::-webkit-scrollbar {

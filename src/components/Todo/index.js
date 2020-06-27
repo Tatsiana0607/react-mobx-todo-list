@@ -98,7 +98,7 @@ class Todo extends PureComponent {
                                 className={classNames('input', 'list-input', { 'invalid': invalid })}
                             />
                         ) : (
-                            <div>
+                            <div className="todo-title">
                                 {todo.title}
                             </div>
                         )}
