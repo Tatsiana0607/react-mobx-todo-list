@@ -33,6 +33,15 @@ class TodoStore {
         this.todos = this.todos.filter(todo => todo.id !== id);
     };
 
+    hideUndoButton = () => {
+        const undoButton = document.getElementById('undo-button');
+        if (undoButton) undoButton.classList.add("hide-me");
+        setTimeout(() => {
+            this.deletedTodo = null;
+            this.secondsRemainingToRestore = 0;
+        }, 300);
+    };
+
     archiveTodo = (todo, index) => {
         this.deletedTodo = { todo, index };
         this.secondsRemainingToRestore = 5;
@@ -40,8 +49,7 @@ class TodoStore {
             this.secondsRemainingToRestore = this.secondsRemainingToRestore - 1;
             if (this.secondsRemainingToRestore <= 0) {
                 clearInterval(interval);
-                this.deletedTodo = null;
-                this.secondsRemainingToRestore = null;
+                this.hideUndoButton();
             }
         }, 1000);
     };
@@ -49,8 +57,7 @@ class TodoStore {
     restoreTodo = () => {
         const { todo, index } = this.deletedTodo;
         this.todos.splice(index, 0, todo);
-        this.deletedTodo = null;
-        this.secondsRemainingToRestore = null;
+        this.hideUndoButton();
     };
 
     updateTodo = (id, title) => {

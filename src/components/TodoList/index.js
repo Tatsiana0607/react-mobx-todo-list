@@ -19,7 +19,7 @@ class TodoList extends PureComponent {
         const { activeTab } = this.state;
         const {
             activeTodos, finishedTodos, deleteTodo, archiveTodo,
-            secondsRemainingToRestore, restoreTodo
+            secondsRemainingToRestore, restoreTodo, deletedTodo
         } = this.props.store;
         const todos = activeTab === 'active' ? activeTodos : finishedTodos;
         return (
@@ -51,6 +51,7 @@ class TodoList extends PureComponent {
                     </div>
                 </CSSTransitionGroup>
                 <UndoButton
+                    visible={!!deletedTodo}
                     restoreTodo={restoreTodo}
                     secondsRemainingToRestore={secondsRemainingToRestore}
                 />

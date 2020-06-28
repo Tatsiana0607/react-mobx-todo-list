@@ -43,3 +43,17 @@
         transform: rotate(0deg);
     }
 }
+
+.undo-appear {
+    opacity: 0;
+}
+
+.undo-appear.undo-appear-active {
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.hide-me {
+    opacity: 0;
+    transition: opacity .3s;
+}
