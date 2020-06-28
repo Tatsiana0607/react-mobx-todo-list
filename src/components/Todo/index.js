@@ -44,8 +44,9 @@ class Todo extends PureComponent {
     };
 
     handleDelete = () => {
-        const { todo, deleteTodo } = this.props;
+        const { todo, deleteTodo, archiveTodo } = this.props;
         deleteTodo(todo.id);
+        archiveTodo(todo);
     };
 
     renderIcons = () => {

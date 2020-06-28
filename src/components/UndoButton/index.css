@@ -1,0 +1,59 @@
+.undo-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: lightsteelblue;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgb(50, 50, 50);
+}
+
+.undo-label {
+    font-size: 20px;
+    color: white;
+    margin-right: 10px;
+}
+
+.undo-clock {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.undo-icon {
+    width: 35px;
+    animation: rotating 4s linear infinite;
+}
+
+.undo-seconds {
+    position: absolute;
+    font-size: 16px;
+    color: white;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.undo-appear {
+    opacity: 0;
+}
+
+.undo-appear.undo-appear-active {
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.hide-me {
+    opacity: 0;
+    transition: opacity .3s;
+}
