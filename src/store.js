@@ -9,6 +9,10 @@ class TodoStore {
 
     searchValue = '';
 
+    deletedTodo = null;
+
+    secondsRemainingToRestore = 0;
+
     get finishedTodos() {
         return this.todos.filter(todo => todo.finished && todo.title.includes(this.searchValue));
     }
@@ -29,6 +33,26 @@ class TodoStore {
         this.todos = this.todos.filter(todo => todo.id !== id);
     };
 
+    archiveTodo = (todo, index) => {
+        this.deletedTodo = { todo, index };
+        this.secondsRemainingToRestore = 5;
+        const interval = setInterval(() => {
+            this.secondsRemainingToRestore = this.secondsRemainingToRestore - 1;
+            if (this.secondsRemainingToRestore <= 0) {
+                clearInterval(interval);
+                this.deletedTodo = null;
+                this.secondsRemainingToRestore = null;
+            }
+        }, 1000);
+    };
+
+    restoreTodo = () => {
+        const { todo, index } = this.deletedTodo;
+        this.todos.splice(index, 0, todo);
+        this.deletedTodo = null;
+        this.secondsRemainingToRestore = null;
+    };
+
     updateTodo = (id, title) => {
         this.todos = this.todos.map(todo => todo.id === id ? { ...todo, title } : todo);
     }
@@ -37,6 +61,8 @@ class TodoStore {
 decorate(TodoStore, {
     todos: observable,
     searchValue: observable,
+    deletedTodo: observable,
+    secondsRemainingToRestore: observable,
     finishedTodos: computed,
     activeTodos: computed,
 });

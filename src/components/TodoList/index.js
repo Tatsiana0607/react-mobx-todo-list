@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Tabs from "../Tabs";
 import Search from "../Search";
 import Todo from "../Todo";
+import UndoButton from "../UndoButton";
 import './index.css';
 
 class TodoList extends PureComponent {
@@ -16,7 +17,10 @@ class TodoList extends PureComponent {
 
     render() {
         const { activeTab } = this.state;
-        const { store: { activeTodos, finishedTodos, deleteTodo } } = this.props;
+        const {
+            activeTodos, finishedTodos, deleteTodo, archiveTodo,
+            secondsRemainingToRestore, restoreTodo
+        } = this.props.store;
         const todos = activeTab === 'active' ? activeTodos : finishedTodos;
         return (
             <div className="list-container">
@@ -34,17 +38,22 @@ class TodoList extends PureComponent {
                     transitionEnterTimeout={700}
                     transitionLeaveTimeout={500}
                 >
-                    {todos.map(todo => (
+                    {todos.map((todo, index) => (
                         <Todo
                             key={todo.id}
                             todo={todo}
                             deleteTodo={deleteTodo}
+                            archiveTodo={(todo) => archiveTodo(todo, index)}
                         />
                     ))}
                     <div className={classNames('no-tasks', { 'show': !todos.length })}>
                         {`No ${activeTab} tasks.`}
                     </div>
                 </CSSTransitionGroup>
+                <UndoButton
+                    restoreTodo={restoreTodo}
+                    secondsRemainingToRestore={secondsRemainingToRestore}
+                />
             </div>
         );
     }
