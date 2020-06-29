@@ -2,19 +2,19 @@
 
 ### List of available features:
 
-##### Create / Edit / Delete tasks:
+#### Create / Edit / Delete tasks:
 
 ![](crud.gif)
 
-##### Mark tasks as done (they still will be available in separate tab):
+#### Mark tasks as done (they still will be available in separate tab):
 
 ![](mark-as-done.gif)
 
-##### Search tasks in both tabs:
+#### Search tasks in both tabs:
 
 ![](search.gif)
 
-##### Restore task if it was deleted by mistake:
+#### Restore task if it was deleted by mistake:
 
 ![](undo.gif)
 
